@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/USS/buttonStyle.uss?fileID=7433441132597879392&amp;guid=875d97622553aae4390e7ad5d97135be&amp;type=3#buttonStyle" />
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1; width: 50%; height: 100%; justify-content: center; align-self: center; align-items: center;">
+        <ui:Label tabindex="-1" text="Title" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" style="width: 100%; height: 20%; font-size: 70px; -unity-text-align: middle-center; -unity-text-outline-width: 0; -unity-text-outline-color: rgba(255, 255, 255, 0);" />
+        <ui:VisualElement name="ButtonContainer" style="flex-grow: 1; width: 100%; height: 20%; align-items: center; justify-content: center; align-self: center;">
+            <ui:Button text="Play" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PlayButton" class="buttonStyle" style="justify-content: flex-start; align-items: auto; align-self: auto; width: 25%; height: 5%;" />
+            <ui:Button text="Options" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OptionsButton" class="buttonStyle" style="justify-content: flex-start; align-items: auto; align-self: auto; width: 25%; height: 5%;" />
+            <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuitButton" class="buttonStyle" style="justify-content: flex-start; align-items: auto; align-self: auto; width: 25%; height: 5%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

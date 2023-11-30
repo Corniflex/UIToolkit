@@ -1,0 +1,46 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/USS/buttonStyle.uss?fileID=7433441132597879392&amp;guid=875d97622553aae4390e7ad5d97135be&amp;type=3#buttonStyle" />
+    <Style src="project://database/Assets/USS/pannelStyle.uss?fileID=7433441132597879392&amp;guid=4e39a1c7f359d93459b237282db30e50&amp;type=3#pannelStyle" />
+    <ui:VisualElement class="buttonStyle" style="flex-grow: 1; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 5%; padding-right: 5%; padding-bottom: 5%; padding-left: 5%; background-color: rgb(152, 152, 152); border-left-color: rgb(130, 130, 130); border-right-color: rgb(130, 130, 130); border-top-color: rgb(130, 130, 130); border-bottom-color: rgb(130, 130, 130); width: 80%; height: 80%; align-items: center; align-self: center; flex-direction: column;">
+        <ui:Label tabindex="-1" text="Play" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" style="font-size: 70%;" />
+        <ui:Label tabindex="-1" text="Select / Create a save file" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Subtitle" style="font-size: 25%;" />
+        <ui:VisualElement name="HorizontalGroup" style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement name="Column" style="flex-grow: 1; width: 20%; height: 80%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
+                <ui:VisualElement name="Column" style="flex-grow: 1; background-color: rgb(89, 89, 89); width: 100%; height: 100%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
+                    <ui:Label tabindex="-1" text="Player Name : " parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%; -unity-font-style: normal; font-size: 15px;" />
+                    <ui:Label tabindex="-1" text="[PlayerName]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PlayerName" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%;" />
+                    <ui:Label tabindex="-1" text="Player Level :" parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%; font-size: 15px; -unity-font-style: normal;" />
+                    <ui:Label tabindex="-1" text="[PlayerLevel]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PlayerLevel" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%;" />
+                    <ui:Label tabindex="-1" text="Zone :" parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%; -unity-font-style: normal; font-size: 15px;" />
+                    <ui:Label tabindex="-1" text="[ZoneName]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ZoneName" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%;" />
+                    <ui:Label tabindex="-1" text="Playtime :" parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%; -unity-font-style: normal; font-size: 15px;" />
+                    <ui:Label tabindex="-1" text="[XXhXXmXXs]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Playtime" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%;" />
+                </ui:VisualElement>
+                <ui:Button text="Delete Save" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeleteSlot1" class="buttonStyle" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Column" style="flex-grow: 1; width: 20%; height: 80%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
+                <ui:VisualElement name="Column" style="flex-grow: 1; background-color: rgb(89, 89, 89); width: 100%; height: 100%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
+                    <ui:Label tabindex="-1" text="Player Name : " parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%; -unity-font-style: normal; font-size: 15px;" />
+                    <ui:Label tabindex="-1" text="[PlayerName]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PlayerName" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%;" />
+                    <ui:Label tabindex="-1" text="Player Level :" parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%; font-size: 15px; -unity-font-style: normal;" />
+                    <ui:Label tabindex="-1" text="[PlayerLevel]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PlayerLevel" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%;" />
+                    <ui:Label tabindex="-1" text="Zone :" parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%; -unity-font-style: normal; font-size: 15px;" />
+                    <ui:Label tabindex="-1" text="[ZoneName]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ZoneName" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%;" />
+                    <ui:Label tabindex="-1" text="Playtime :" parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%; -unity-font-style: normal; font-size: 15px;" />
+                    <ui:Label tabindex="-1" text="[XXhXXmXXs]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Playtime" style="align-items: stretch; align-self: flex-start; justify-content: space-around; margin-top: 5%; margin-right: 0; margin-bottom: 0; margin-left: 5%;" />
+                </ui:VisualElement>
+                <ui:Button text="Delete Save" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeleteSlot2" class="buttonStyle" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Column" style="flex-grow: 1; width: 20%; height: 80%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
+                <ui:VisualElement name="Column" style="flex-grow: 1; background-color: rgb(89, 89, 89); width: 100%; height: 100%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
+                    <ui:Label tabindex="-1" text="New Save Slot" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                </ui:VisualElement>
+                <ui:Toggle label="PermaDeath" style="width: 100%; height: 20%; margin-top: 15px; margin-bottom: 15px; align-self: center; align-items: center; justify-content: space-around; flex-wrap: nowrap;" />
+            </ui:VisualElement>
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true">
+                <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            </ui:Button>
+        </ui:VisualElement>
+        <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="buttonStyle" style="align-items: auto; font-size: 50%; width: 30%; max-height: 10%; min-height: 10%; height: 10%;" />
+    </ui:VisualElement>
+</ui:UXML>
