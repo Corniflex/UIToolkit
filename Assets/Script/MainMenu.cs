@@ -89,6 +89,9 @@ public class MainMenu : MonoBehaviour
             {
                 buttonToSet = currentMenuRootElement.Q<Button>($"DeleteSlot{i}");
                 buttonToSet.RegisterCallback<ClickEvent, int>(DeleteSlot, i);
+
+                buttonToSet = currentMenuRootElement.Q<Button>($"File{i}Button");
+                buttonToSet.RegisterCallback<ClickEvent, int>(LoadDataFromFile, i);
             }
             
             Debug.Log("Save select menu buttons inited");
@@ -132,26 +135,32 @@ public class MainMenu : MonoBehaviour
     private void SetResolution(ChangeEvent<Enum> e)
     {
         Debug.Log($"Resolution : {currentMenuRootElement.Q<EnumField>("ResolutionEnum").value}");
+        PlayerPrefs.SetString("Resolution", currentMenuRootElement.Q<EnumField>("ResolutionEnum").value.ToString());
     }
 
     private void ToggleFullscreen(ClickEvent e)
     {
-        Debug.Log($"Fullscreen : {currentMenuRootElement.Q<Toggle>("FullscreenToggle").value}");
+        bool fullscreenIsToggled = currentMenuRootElement.Q<Toggle>("FullscreenToggle").value;
+        Debug.Log($"Fullscreen : {fullscreenIsToggled}");
+        PlayerPrefs.SetInt("ToggleFullscreen", fullscreenIsToggled ? 1 : 0);
     }
     
     private void MasterSlider(ChangeEvent<float> e)
     {
         Debug.Log($"Master volume : {Mathf.RoundToInt(currentMenuRootElement.Q<Slider>("MasterSlider").value)}");
+        PlayerPrefs.SetInt("MasterVolume", Mathf.RoundToInt(currentMenuRootElement.Q<Slider>("MasterSlider").value));;
     }
 
     private void MusicSlider(ChangeEvent<float> e)
     {
         Debug.Log($"Music volume : {Mathf.RoundToInt(currentMenuRootElement.Q<Slider>("MusicSlider").value)}");
+        PlayerPrefs.SetInt("MusicVolume", Mathf.RoundToInt(currentMenuRootElement.Q<Slider>("MusicSlider").value));;
     }
 
     private void EffectSlider(ChangeEvent<float> e)
     {
         Debug.Log($"Effects volume : {Mathf.RoundToInt(currentMenuRootElement.Q<Slider>("EffectsSlider").value)}");
+        PlayerPrefs.SetInt("EffectsVolume", Mathf.RoundToInt(currentMenuRootElement.Q<Slider>("EffectsSlider").value));;
     }
     #endregion
 
@@ -162,6 +171,15 @@ public class MainMenu : MonoBehaviour
         Debug.Log($"Delete save in slot : {i}");
     }
 
+    private void LoadDataFromFile(ClickEvent e, int index)
+    {
+        var playerName = currentMenuRootElement.Q<Label>($"Slot{index}PlayerName").text;
+        var playerLevel = currentMenuRootElement.Q<Label>($"Slot{index}PlayerLevel").text;
+        var playerCurrentZone = currentMenuRootElement.Q<Label>($"Slot{index}ZoneName").text;
+        var playerPlaytime = currentMenuRootElement.Q<Label>($"Slot{index}Playtime").text;
+        Debug.Log($"Infos : {playerName}//{playerLevel}//{playerCurrentZone}//{playerPlaytime}");
+    }
+    
     private void ReadSaveData(PseudoSaveFileSO file, int slotIndex)
     {
         
