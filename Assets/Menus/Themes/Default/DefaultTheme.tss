@@ -1,4 +1,4 @@
-@import url("unity-theme://default");
+@import url("/Assets/Menus/UIToolkit data/UnityDefaultRuntimeTheme.tss");
 
 @import url("/Assets/USS/buttonStyle.uss");
 @import url("/Assets/USS/buttonStyle2.uss");

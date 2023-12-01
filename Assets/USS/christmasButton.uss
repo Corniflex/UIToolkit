@@ -1,0 +1,22 @@
+.chButton {
+    border-left-color: rgb(245, 98, 77);
+    border-right-color: rgb(245, 98, 77);
+    border-top-color: rgb(245, 98, 77);
+    border-bottom-color: rgb(245, 98, 77);
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background-color: rgb(204, 35, 30);
+}
+
+.chButton:hover {
+    border-left-color: rgb(52, 166, 95);
+    border-right-color: rgb(52, 166, 95);
+    border-top-color: rgb(52, 166, 95);
+    border-bottom-color: rgb(52, 166, 95);
+    background-color: rgb(15, 138, 95);
+}

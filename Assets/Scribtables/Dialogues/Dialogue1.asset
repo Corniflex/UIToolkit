@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0099f39f384fc0a4bb0f2ab9531f28b4, type: 3}
+  m_Name: Dialogue1
+  m_EditorClassIdentifier: 
+  characterName: Purple
+  characterSprite: {fileID: 21300000, guid: 25be8e48d30dbca4d95888dcf2f158ed, type: 3}
+  dialogue:
+    text: Say yes
+    hasChoice: 0
+    choice:
+      options: []
+      choiceFollow:
+      - text: Please
+        hasChoice: 1
+        choice:
+          options:
+          - Yes
+          - No
+          choiceFollow:
+          - text: Yes.
+            hasChoice: 0
+            choice:
+              options: []
+              choiceFollow: []
+            isLastDialogue: 1
+          - text: Huh ?
+            hasChoice: 1
+            choice:
+              options:
+              - Sorry
+              - Not sorry
+              choiceFollow:
+              - text: :)
+                hasChoice: 0
+                choice:
+                  options: []
+                  choiceFollow: []
+                isLastDialogue: 1
+              - text: :(
+                hasChoice: 1
+                choice:
+                  options: []
+                  choiceFollow: []
+                isLastDialogue: 1
+            isLastDialogue: 0
+        isLastDialogue: 0
+    isLastDialogue: 0

@@ -1,0 +1,4 @@
+.chFont {
+    -unity-font: initial;
+    -unity-font-style: italic;
+}

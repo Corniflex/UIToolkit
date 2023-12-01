@@ -1,0 +1,13 @@
+.chPanel {
+    border-top-width: 30px;
+    border-right-width: 30px;
+    border-bottom-width: 30px;
+    border-left-width: 30px;
+    border-top-left-radius: 70px;
+    border-bottom-right-radius: 70px;
+    background-color: rgb(35, 94, 111);
+    border-left-color: rgb(15, 138, 95);
+    border-right-color: rgb(15, 138, 95);
+    border-top-color: rgb(15, 138, 95);
+    border-bottom-color: rgb(15, 138, 95);
+}

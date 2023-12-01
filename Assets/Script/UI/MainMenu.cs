@@ -2,10 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class MainMenu : MonoBehaviour
 {
+    [Header("Panel Settings")] 
+    [SerializeField] private PanelSettings panelSettings;
+    [SerializeField] private ThemeStyleSheet[] themes;
+    
     [Header("Main Menu")] 
     [SerializeField] private UIDocument mainMenuUIDocument;
     [SerializeField] private GameObject mainMenu;
@@ -60,11 +65,17 @@ public class MainMenu : MonoBehaviour
         {
             currentMenuRootElement = optionsMenuUIDocument.rootVisualElement;
             
-            InitResolutions();
+            var dropDownToSet = currentMenuRootElement.Q<DropdownField>("ResolutionDropdown");
             
-            var enumToSet = currentMenuRootElement.Q<EnumField>("ResolutionEnum");
-            enumToSet.RegisterCallback<ChangeEvent<Enum>>(SetResolution);
-            //enumToSet.value = PlayerPrefs.GetString("Resolution"); find way to swap from string to enum value
+            dropDownToSet.choices = InitResolutions();
+            dropDownToSet.value = dropDownToSet.choices[0];
+            dropDownToSet.RegisterValueChangedCallback(SetResolution);
+            
+            dropDownToSet = currentMenuRootElement.Q<DropdownField>("ThemeDropdown");
+            dropDownToSet.choices = new List<string>(){ "Default" , "Christmas"} ;
+            dropDownToSet.value = dropDownToSet.choices[0];
+            dropDownToSet.RegisterValueChangedCallback(ChangeTheme);
+            
             
             var toggleToSet = currentMenuRootElement.Q<Toggle>("FullscreenToggle");
             toggleToSet.RegisterCallback<ClickEvent>(ToggleFullscreen);
@@ -84,6 +95,9 @@ public class MainMenu : MonoBehaviour
             
             var buttonToSet = currentMenuRootElement.Q<Button>("BackButton");
             buttonToSet.RegisterCallback<ClickEvent>(OpenMainMenu);
+
+            buttonToSet = currentMenuRootElement.Q<Button>("ReturnButton");
+            buttonToSet.style.display = DisplayStyle.None;
             
             Debug.Log("Options menu buttons inited");
         }
@@ -97,22 +111,12 @@ public class MainMenu : MonoBehaviour
             
             for (int i = 0; i < pseudoSaveFiles.Length; i++)
             {
-                buttonToSet = currentMenuRootElement.Q<Button>($"DeleteSlot{i+1}");
-                buttonToSet.RegisterCallback<ClickEvent, int>(DeleteSlot, i+1);
-
-                buttonToSet = currentMenuRootElement.Q<Button>($"File{i+1}Button");
-                buttonToSet.RegisterCallback<ClickEvent, int>(LoadDataFromFile, i+1);
-
-                currentMenuRootElement.Q<Label>($"Slot{i+1}PlayerName").text = pseudoSaveFiles[i].CharacterName;
-                currentMenuRootElement.Q<Label>($"Slot{i+1}PlayerLevel").text = pseudoSaveFiles[i].CharacterLevel.ToString();
-                currentMenuRootElement.Q<Label>($"Slot{i+1}ZoneName").text = pseudoSaveFiles[i].CharacterCurrentZoneName;
-                currentMenuRootElement.Q<Label>($"Slot{i+1}Playtime").text = pseudoSaveFiles[i].playTime;
+                DisplaySaveSlot(i);
             }
 
             for (int i = pseudoSaveFiles.Length; i < 4; i++)
             {
-                Debug.Log($"No file at index {i}");
-                currentMenuRootElement.Q<GroupBox>($"File{i+1}Data").SetEnabled(false);
+                DisplayAvailableSlot(i);
             }
             
             Debug.Log("Save select menu buttons inited");
@@ -153,61 +157,110 @@ public class MainMenu : MonoBehaviour
 
     #region OptionsMenu
 
-    private void InitResolutions()
+    private List<String> InitResolutions()
     {
+        var resList = new List<String>();
         foreach (var res in Screen.resolutions)
         {
-            Debug.Log(currentMenuRootElement.Q<EnumField>("ResolutionEnum").value.ToString());
-            
+            resList.Add(res.ToString());
         }
+
+        return resList;
     }
     
-    private void SetResolution(ChangeEvent<Enum> e)
+    private void SetResolution(ChangeEvent<string> e)
     {
-        Debug.Log($"Resolution : {currentMenuRootElement.Q<EnumField>("ResolutionEnum").value}");
-        PlayerPrefs.SetString("Resolution", currentMenuRootElement.Q<EnumField>("ResolutionEnum").value.ToString());
+        Debug.Log($"Resolution : {currentMenuRootElement.Q<DropdownField>("ResolutionDropdown").value}");
+        //PlayerPrefs.SetString("Resolution", currentMenuRootElement.Q<EnumField>("ResolutionEnum").value.ToString());
     }
 
+    private void ChangeTheme(ChangeEvent<string> e)
+    {
+        Debug.Log(e.newValue);
+        if (e.newValue == "Default")
+            panelSettings.themeStyleSheet = themes[0];
+        if(e.newValue == "Christmas")
+            panelSettings.themeStyleSheet = themes[1];
+    }
+    
     private void ToggleFullscreen(ClickEvent e)
     {
         bool fullscreenIsToggled = currentMenuRootElement.Q<Toggle>("FullscreenToggle").value;
-        Debug.Log($"Fullscreen : {fullscreenIsToggled}");
         PlayerPrefs.SetInt("ToggleFullscreen", fullscreenIsToggled ? 1 : 0);
     }
     
     private void MasterSlider(ChangeEvent<float> e)
     {
-        Debug.Log($"Master volume : {Mathf.RoundToInt(currentMenuRootElement.Q<Slider>("MasterSlider").value)}");
         PlayerPrefs.SetInt("MasterVolume", Mathf.RoundToInt(currentMenuRootElement.Q<Slider>("MasterSlider").value));;
     }
 
     private void MusicSlider(ChangeEvent<float> e)
     {
-        Debug.Log($"Music volume : {Mathf.RoundToInt(currentMenuRootElement.Q<Slider>("MusicSlider").value)}");
         PlayerPrefs.SetInt("MusicVolume", Mathf.RoundToInt(currentMenuRootElement.Q<Slider>("MusicSlider").value));;
     }
 
     private void EffectSlider(ChangeEvent<float> e)
     {
-        Debug.Log($"Effects volume : {Mathf.RoundToInt(currentMenuRootElement.Q<Slider>("EffectsSlider").value)}");
         PlayerPrefs.SetInt("EffectsVolume", Mathf.RoundToInt(currentMenuRootElement.Q<Slider>("EffectsSlider").value));;
     }
     #endregion
 
     #region SaveSelectMenu
 
+    private void DisplaySaveSlot(int i)
+    {
+        var buttonToSet = currentMenuRootElement.Q<Button>($"DeleteSlot{i+1}");
+        buttonToSet.RegisterCallback<ClickEvent, int>(DeleteSlot, i+1);
+
+        buttonToSet = currentMenuRootElement.Q<Button>($"File{i+1}Button");
+        buttonToSet.RegisterCallback<ClickEvent, int>(LoadGame, i+1);
+
+        currentMenuRootElement.Q<Label>($"Slot{i+1}PlayerName").text = pseudoSaveFiles[i].CharacterName;
+        currentMenuRootElement.Q<Label>($"Slot{i+1}PlayerLevel").text = pseudoSaveFiles[i].CharacterLevel.ToString();
+        currentMenuRootElement.Q<Label>($"Slot{i+1}ZoneName").text = pseudoSaveFiles[i].CharacterCurrentZoneName;
+        currentMenuRootElement.Q<Label>($"Slot{i+1}Playtime").text = pseudoSaveFiles[i].playTime;
+
+        currentMenuRootElement.Q<GroupBox>($"File{i + 1}NoData").style.display = DisplayStyle.None;
+        currentMenuRootElement.Q<Toggle>($"File{i + 1}Toggle").style.display = DisplayStyle.None;
+        currentMenuRootElement.Q<GroupBox>($"File{i+1}Data").style.display = DisplayStyle.Flex;
+        currentMenuRootElement.Q<Button>($"DeleteSlot{i + 1}").style.display = DisplayStyle.Flex;
+    }
+
+    private void DisplayAvailableSlot(int i)
+    {
+        var buttonToSet = currentMenuRootElement.Q<Button>($"File{i+1}Button");
+        buttonToSet.RegisterCallback<ClickEvent>(LoadNewGame);
+        currentMenuRootElement.Q<GroupBox>($"File{i+1}Data").style.display = DisplayStyle.None;
+        currentMenuRootElement.Q<Button>($"DeleteSlot{i + 1}").style.display = DisplayStyle.None;
+        currentMenuRootElement.Q<GroupBox>($"File{i + 1}NoData").style.display = DisplayStyle.Flex;
+        currentMenuRootElement.Q<Toggle>($"File{i + 1}Toggle").style.display = DisplayStyle.Flex;
+        currentMenuRootElement.Q<Toggle>($"File{i + 1}Toggle").RegisterCallback<ClickEvent>(EnablePermadeath);
+                
+    }
+    
     private void DeleteSlot(ClickEvent e, int i)
     {
+        DisplayAvailableSlot(i-1);
         Debug.Log($"Delete save in slot : {i}");
     }
 
-    private void LoadDataFromFile(ClickEvent e, int index)
+    private void EnablePermadeath(ClickEvent e)
+    {
+        Debug.Log("Careful, permadeath means you only get one try.");
+    }
+    
+    private void LoadDataFromFile(int index)
     {
         var playerName = currentMenuRootElement.Q<Label>($"Slot{index}PlayerName").text;
         var playerLevel = currentMenuRootElement.Q<Label>($"Slot{index}PlayerLevel").text;
         var playerCurrentZone = currentMenuRootElement.Q<Label>($"Slot{index}ZoneName").text;
         var playerPlaytime = currentMenuRootElement.Q<Label>($"Slot{index}Playtime").text;
         Debug.Log($"Infos : {playerName}//{playerLevel}//{playerCurrentZone}//{playerPlaytime}");
+        
+        PlayerPrefs.SetString("PlayerName", playerName);
+        PlayerPrefs.SetString("PlayerLevel", playerLevel);
+        PlayerPrefs.SetString("PlayerCurrentZone", playerCurrentZone);
+        PlayerPrefs.SetString("PlayerPlaytime", playerPlaytime);
     }
     
     private void ReadSaveData(PseudoSaveFileSO file, int slotIndex)
@@ -216,11 +269,20 @@ public class MainMenu : MonoBehaviour
     }
     
     #endregion
+
+    private void LoadNewGame(ClickEvent e)
+    {
+        SceneManager.LoadScene(1);
+    }
+    private void LoadGame(ClickEvent e, int index)
+    {
+        LoadDataFromFile(index);
+        SceneManager.LoadScene(1);
+    }
     
     private void QuitGame(ClickEvent e)
     {
         Debug.Log("Quit Game.");
         Application.Quit();
     }
-    
 }

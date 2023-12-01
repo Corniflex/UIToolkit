@@ -1,2 +1,13 @@
 .pannel {
+    border-top-width: 30px;
+    border-right-width: 30px;
+    border-bottom-width: 30px;
+    border-left-width: 30px;
+    border-top-left-radius: 70px;
+    border-bottom-right-radius: 70px;
+    border-left-color: rgb(96, 96, 96);
+    border-right-color: rgb(96, 96, 96);
+    border-top-color: rgb(96, 96, 96);
+    border-bottom-color: rgb(96, 96, 96);
+    background-color: rgb(144, 144, 144);
 }

@@ -1,26 +1,29 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/USS/buttonStyle.uss?fileID=7433441132597879392&amp;guid=875d97622553aae4390e7ad5d97135be&amp;type=3#buttonStyle" />
-    <ui:VisualElement class="buttonStyle" style="flex-grow: 1; align-items: center; justify-content: space-between; flex-direction: column; width: 50%; height: 100%; align-self: center; background-color: rgb(115, 115, 115); border-left-color: rgb(111, 111, 111); border-right-color: rgb(111, 111, 111); border-top-color: rgb(111, 111, 111); border-bottom-color: rgb(111, 111, 111); border-top-width: 30px; border-right-width: 30px; border-bottom-width: 30px; border-left-width: 30px; -unity-slice-left: 0; -unity-slice-top: 0; -unity-slice-right: 0; -unity-slice-bottom: 0; border-top-left-radius: 0; border-top-right-radius: 70px; border-bottom-right-radius: 0; border-bottom-left-radius: 70px;">
-        <ui:Label tabindex="-1" text="Options" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 100%; height: 10%; font-size: 70px; -unity-text-align: middle-center;" />
+    <ui:VisualElement class="chPanel pannel" style="flex-grow: 1; align-items: center; justify-content: space-between; flex-direction: column; width: 50%; height: 100%; align-self: center;">
+        <ui:Label tabindex="-1" text="Options" parse-escape-sequences="true" display-tooltip-when-elided="true" class="chFont" style="width: 100%; height: 10%; font-size: 70px; -unity-text-align: middle-center;" />
         <ui:VisualElement style="flex-grow: 1; flex-direction: column; width: 100%; height: 90%; align-self: center;">
-            <ui:VisualElement name="LineContainer" style="flex-grow: 1; flex-direction: row; align-self: auto; justify-content: space-between; align-items: center; height: auto;">
-                <ui:EnumField label="Resolution" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" name="ResolutionEnum" style="margin-top: 20px; margin-bottom: 20px; align-self: center; width: auto; align-items: center; justify-content: space-between; flex-direction: row; margin-right: 0; margin-left: 0; flex-wrap: wrap; font-size: 50%;" />
-            </ui:VisualElement>
-            <ui:VisualElement name="LineContainer" style="flex-grow: 1; flex-direction: row; align-self: auto; justify-content: space-between; align-items: center; height: auto; font-size: 50%;">
-                <ui:Toggle label="Fullscreen" name="FullscreenToggle" style="align-self: center; justify-content: space-around; align-items: center; width: auto;" />
-            </ui:VisualElement>
-            <ui:VisualElement name="LineContainer" style="flex-grow: 1; flex-direction: row; align-self: auto; justify-content: space-between; align-items: center; height: auto;">
-                <ui:Slider picking-mode="Ignore" label="Master Volume" value="50" high-value="100" name="MasterSlider" show-input-field="true" style="align-items: center; justify-content: space-around; top: auto; width: 100%; font-size: 50%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
-            </ui:VisualElement>
-            <ui:VisualElement name="LineContainer" style="flex-grow: 1; flex-direction: row; align-self: auto; align-items: center; justify-content: space-between; height: auto;">
-                <ui:Slider picking-mode="Ignore" label="Music" value="15" high-value="100" name="MusicSlider" show-input-field="true" style="align-items: center; justify-content: space-between; top: auto; width: 100%; font-size: 50%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
-            </ui:VisualElement>
-            <ui:VisualElement name="LineContainer" style="flex-grow: 1; flex-direction: row; align-self: auto; justify-content: space-between; align-items: center; height: auto;">
-                <ui:Slider picking-mode="Ignore" label="Effects" value="30" high-value="100" name="EffectsSlider" show-input-field="true" style="align-items: center; justify-content: space-around; top: auto; width: 100%; font-size: 50%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
-            </ui:VisualElement>
-            <ui:VisualElement name="LineContainer" style="flex-grow: 1; flex-direction: row; align-self: auto; justify-content: center; align-items: center; height: auto;">
-                <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="buttonStyle" style="align-self: center; align-items: center; justify-content: space-around; width: 75%; height: 50%; font-size: 50%;" />
-            </ui:VisualElement>
+            <ui:GroupBox>
+                <ui:DropdownField label="Resolution" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="ResolutionDropdown" class="chFont chDropdown" />
+            </ui:GroupBox>
+            <ui:GroupBox style="align-self: flex-start;">
+                <ui:Toggle label="Fullscreen" name="FullscreenToggle" class="chFont chToggle" style="align-self: center; justify-content: space-around; align-items: center; width: auto;" />
+            </ui:GroupBox>
+            <ui:GroupBox>
+                <ui:Slider picking-mode="Ignore" label="Master Volume" value="50" high-value="100" name="MasterSlider" show-input-field="true" class="chFont chSlider" style="align-items: center; justify-content: space-around; top: auto; width: 100%; font-size: 50%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+            </ui:GroupBox>
+            <ui:GroupBox>
+                <ui:Slider picking-mode="Ignore" label="Music" value="15" high-value="100" name="MusicSlider" show-input-field="true" class="chFont chSlider" style="align-items: center; justify-content: space-between; top: auto; width: 100%; font-size: 50%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+            </ui:GroupBox>
+            <ui:GroupBox>
+                <ui:Slider picking-mode="Ignore" label="Effects" value="30" high-value="100" name="EffectsSlider" show-input-field="true" class="chFont chSlider" style="align-items: center; justify-content: space-around; top: auto; width: 100%; font-size: 50%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+            </ui:GroupBox>
+            <ui:GroupBox>
+                <ui:DropdownField label="Theme" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="ThemeDropdown" class="chFont chDropdown" />
+            </ui:GroupBox>
+            <ui:GroupBox name="GroupBox" style="flex-direction: row; align-self: stretch; justify-content: space-between;">
+                <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="buttonStyle chFont chButton" style="align-self: center; align-items: center; justify-content: space-around; width: 40%; height: 100%; font-size: 40%;" />
+                <ui:Button text="Return to menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ReturnButton" class="buttonStyle chFont chButton" style="align-self: center; align-items: center; justify-content: space-around; width: 40%; height: 100%; font-size: 40%; display: flex; visibility: visible;" />
+            </ui:GroupBox>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

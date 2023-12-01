@@ -434,6 +434,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d1cd7b51acd8143b2dc4606249811a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelSettings: {fileID: 11400000, guid: a1ecb00f24f13da49a467599c157758c, type: 2}
+  themes:
+  - {fileID: -4733365628477956816, guid: 07668d7d76355a1409606d5f48cae0d6, type: 3}
+  - {fileID: -4733365628477956816, guid: c86e051849720a747ab7513c77cbe4cd, type: 3}
   mainMenuUIDocument: {fileID: 1127610234}
   mainMenu: {fileID: 1127610232}
   optionsMenuUIDocument: {fileID: 1155878596}
