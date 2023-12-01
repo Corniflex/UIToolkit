@@ -17,6 +17,9 @@ public class MainMenu : MonoBehaviour
     [Header("Save Select Menu")] 
     [SerializeField] private UIDocument saveSelectMenuUIDocument;
     [SerializeField] private GameObject saveSelectMenu;
+
+    [Header("Pseudo Save files")] 
+    [SerializeField] private PseudoSaveFileSO[] pseudoSaveFiles;
     
     private VisualElement currentMenuRootElement;
 
@@ -48,7 +51,7 @@ public class MainMenu : MonoBehaviour
             buttonToSet.RegisterCallback<ClickEvent>(OpenOptionsMenu);
 
             buttonToSet = currentMenuRootElement.Q<Button>("QuitButton");
-            buttonToSet.RegisterCallback<ClickEvent>(OpenMainMenu);
+            buttonToSet.RegisterCallback<ClickEvent>(QuitGame);
             
             Debug.Log("Main menu buttons inited");
         }
@@ -57,20 +60,27 @@ public class MainMenu : MonoBehaviour
         {
             currentMenuRootElement = optionsMenuUIDocument.rootVisualElement;
             
+            InitResolutions();
+            
             var enumToSet = currentMenuRootElement.Q<EnumField>("ResolutionEnum");
             enumToSet.RegisterCallback<ChangeEvent<Enum>>(SetResolution);
+            //enumToSet.value = PlayerPrefs.GetString("Resolution"); find way to swap from string to enum value
             
             var toggleToSet = currentMenuRootElement.Q<Toggle>("FullscreenToggle");
             toggleToSet.RegisterCallback<ClickEvent>(ToggleFullscreen);
+            toggleToSet.value = PlayerPrefs.GetInt("ToggleFullscreen") == 1;
             
             var sliderToSet = currentMenuRootElement.Q<Slider>("MasterSlider");
             sliderToSet.RegisterCallback<ChangeEvent<float>>(MasterSlider);
+            sliderToSet.value = PlayerPrefs.GetInt("MasterVolume");
             
             sliderToSet = currentMenuRootElement.Q<Slider>("MusicSlider");
             sliderToSet.RegisterCallback<ChangeEvent<float>>(MusicSlider);
+            sliderToSet.value = PlayerPrefs.GetInt("MusicVolume");
 
             sliderToSet = currentMenuRootElement.Q<Slider>("EffectsSlider");
             sliderToSet.RegisterCallback<ChangeEvent<float>>(EffectSlider);
+            sliderToSet.value = PlayerPrefs.GetInt("EffectsVolume");
             
             var buttonToSet = currentMenuRootElement.Q<Button>("BackButton");
             buttonToSet.RegisterCallback<ClickEvent>(OpenMainMenu);
@@ -85,13 +95,24 @@ public class MainMenu : MonoBehaviour
             var buttonToSet = currentMenuRootElement.Q<Button>("BackButton");
             buttonToSet.RegisterCallback<ClickEvent>(OpenMainMenu);
             
-            for (int i = 1; i <= 3; i++)
+            for (int i = 0; i < pseudoSaveFiles.Length; i++)
             {
-                buttonToSet = currentMenuRootElement.Q<Button>($"DeleteSlot{i}");
-                buttonToSet.RegisterCallback<ClickEvent, int>(DeleteSlot, i);
+                buttonToSet = currentMenuRootElement.Q<Button>($"DeleteSlot{i+1}");
+                buttonToSet.RegisterCallback<ClickEvent, int>(DeleteSlot, i+1);
 
-                buttonToSet = currentMenuRootElement.Q<Button>($"File{i}Button");
-                buttonToSet.RegisterCallback<ClickEvent, int>(LoadDataFromFile, i);
+                buttonToSet = currentMenuRootElement.Q<Button>($"File{i+1}Button");
+                buttonToSet.RegisterCallback<ClickEvent, int>(LoadDataFromFile, i+1);
+
+                currentMenuRootElement.Q<Label>($"Slot{i+1}PlayerName").text = pseudoSaveFiles[i].CharacterName;
+                currentMenuRootElement.Q<Label>($"Slot{i+1}PlayerLevel").text = pseudoSaveFiles[i].CharacterLevel.ToString();
+                currentMenuRootElement.Q<Label>($"Slot{i+1}ZoneName").text = pseudoSaveFiles[i].CharacterCurrentZoneName;
+                currentMenuRootElement.Q<Label>($"Slot{i+1}Playtime").text = pseudoSaveFiles[i].playTime;
+            }
+
+            for (int i = pseudoSaveFiles.Length; i < 4; i++)
+            {
+                Debug.Log($"No file at index {i}");
+                currentMenuRootElement.Q<GroupBox>($"File{i+1}Data").SetEnabled(false);
             }
             
             Debug.Log("Save select menu buttons inited");
@@ -132,6 +153,15 @@ public class MainMenu : MonoBehaviour
 
     #region OptionsMenu
 
+    private void InitResolutions()
+    {
+        foreach (var res in Screen.resolutions)
+        {
+            Debug.Log(currentMenuRootElement.Q<EnumField>("ResolutionEnum").value.ToString());
+            
+        }
+    }
+    
     private void SetResolution(ChangeEvent<Enum> e)
     {
         Debug.Log($"Resolution : {currentMenuRootElement.Q<EnumField>("ResolutionEnum").value}");

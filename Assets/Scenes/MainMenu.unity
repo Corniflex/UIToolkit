@@ -440,6 +440,10 @@ MonoBehaviour:
   optionsMenu: {fileID: 1155878594}
   saveSelectMenuUIDocument: {fileID: 1702917734}
   saveSelectMenu: {fileID: 1702917732}
+  pseudoSaveFiles:
+  - {fileID: 11400000, guid: 54572ebde64a464428dd213a76482857, type: 2}
+  - {fileID: 11400000, guid: 4509225d3af2ec742acf46d9697a726e, type: 2}
+  - {fileID: 11400000, guid: 797b9a3a7b8b84a4ab04bf58bf9b5715, type: 2}
 --- !u!4 &1442646949
 Transform:
   m_ObjectHideFlags: 0
